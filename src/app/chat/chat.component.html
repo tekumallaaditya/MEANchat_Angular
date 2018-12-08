@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<head>    
     <title>MEAN chat</title>
 </head>
-<body>
-    <h1>This is just to test the chat component</h1>
+<body id="mainPage" >
+    <div class="container" >
+        <div class="row">
+            <div class="jumbotron"  align="center">
+                <h1>Have fun!!!</h1>
+                <img class="img-rectangle" src="../assets/images/footprint.jpg"><br><br>
+                <form #form1 = "ngForm" (ngSubmit) = OnSubmit(form1) style="display: inline-block">
+                    <div class="form-group ">                        
+                        <input type="text" required class="form-control" name="Cname" #Cname = "ngModel"
+                        [(ngModel)] = "chatName" placeholder="Enter your name">
+                        <div class="alert alert-danger" *ngIf="Cname.touched && !Cname.valid">
+                            <div *ngIf="Cname.errors.required">Chat name is required</div>                                                              
+                        </div>
+                    </div>
+                    <button style="display: inline-block" class="btn btn-danger" type="Submit" [disabled]="!form1.valid">Enter</button>                                  
+                </form>                
+            </div>
+        </div>
+    </div>
     
 </body>
 </html>
