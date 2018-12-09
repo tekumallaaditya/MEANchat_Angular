@@ -18,7 +18,10 @@
                         </div>
                     </div>
                     <button style="display: inline-block" class="btn btn-danger" type="Submit" [disabled]="!form1.valid">Enter</button>                                  
-                </form>                
+                </form>     
+                <div *ngIf = "userCreated == false">
+                    <h2>User name selected is already in use</h2>
+                </div>           
             </div>
         </div>
     </div>

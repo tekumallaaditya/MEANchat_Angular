@@ -6,8 +6,56 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
-    <h1>ChatPage -> and the name is {{userName}}</h1>
+<body id="chatPage">
+    <div id="chatWindow">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 panel panel-primary col-sm-offset-1">
+                    <div class="panel-body chatWrap">
+                        <div id="chatWrap" >
+                            <div  id="chat"  *ngFor = "let each of chatMessages">
+                                <div *ngIf = "each.user == userName">
+                                    <p align="right">{{each.user}}:{{each.msg}}</p>
+                                </div> 
+                                <div *ngIf  = "each.user != userName">
+                                    <p align="left">{{each.user}}:{{each.msg}}</p>
+                                </div>                                                          
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-offset-1  panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Currently Online</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div id="users" *ngFor = "let each of onlineUserList">
+                            <p>{{each}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-offset-2">
+                    <h4 align="right">Invite your friends to the chat by clicking <a href="#" target="_blank">Link</a></h4>
+                </div>                    
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-1">
+                    <form #formMessage = "ngForm" (keydown.enter) = sendMessage(formMessage) id="message-box">
+                        <div class="form-group">
+                            <textarea  name="message" #message = "ngModel" [(ngModel)]= "userMessage" id="message" cols="75" rows="5" placeholder="enter your message"></textarea>
+                        </div>                        
+                    </form>
+                    <h4>To send a personal message add '@' in before the name and give a space!</h4>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
     
 </body>
 </html>
