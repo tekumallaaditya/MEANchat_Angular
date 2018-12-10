@@ -90,4 +90,17 @@ export class chatService{
         this._socket.emit('user left', data);
     }
 
+    privateFailed(){
+        var observable = new Observable<{user:String, targetUser:String}>(observer =>{
+            this._socket.on('private failed', function(data){
+                console.log('list of users' + data.user + ' ' + data.targetUser);
+                observer.next(data);
+            });
+            return function(){
+                this._socket.disconnect();
+            }            
+        });
+        return observable;        
+    }
+
 }

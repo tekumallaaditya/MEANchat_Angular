@@ -15,10 +15,13 @@ export class chatPageComponent implements OnInit{
     userMessage:String;
     chatMessages:Array<{user:String, msg:String}>= [];
     onlineUserList:Array<String>=[];
+    privateFailed:String;
+    privateFailedBool:Boolean = false;
 
     constructor(private _actRoute: ActivatedRoute, private _router:Router, private _chatSerice: chatService){
         this._chatSerice.chatMessage().subscribe((data)=>{
             this.chatMessages.push(data);
+            this.privateFailedBool = false;
         });
 
         this._chatSerice.onlineUsers().subscribe((data)=>{
@@ -29,6 +32,11 @@ export class chatPageComponent implements OnInit{
                 this.onlineUserList.push(data[i]);
             } 
             
+        });
+
+        this._chatSerice.privateFailed().subscribe((data)=>{
+            this.privateFailedBool= true;
+            this.privateFailed = data.targetUser;
         })
     }
 
@@ -43,6 +51,7 @@ export class chatPageComponent implements OnInit{
     }
 
     sendMessage(form: NgForm){
+        this.privateFailedBool = false;
         console.log('message in component-->' + form.value.message);
         this._chatSerice.sendMessage({user: this.userName, msg: this.userMessage});
         form.reset();

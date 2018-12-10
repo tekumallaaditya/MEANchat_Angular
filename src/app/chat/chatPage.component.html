@@ -49,6 +49,9 @@
                             <textarea  name="message" #message = "ngModel" [(ngModel)]= "userMessage" id="message" cols="75" rows="5" placeholder="enter your message"></textarea>
                         </div>                        
                     </form>
+                    <div *ngIf = "privateFailedBool">
+                        <h3>{{privateFailed }}is not online</h3>
+                    </div>
                     <h4>To send a personal message add '@' in before the name and give a space!</h4>
                 </div>
 
